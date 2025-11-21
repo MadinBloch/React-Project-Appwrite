@@ -1,5 +1,5 @@
-import configig from "../configig/configig";
 import { Client, ID, Databases, Storage, Query } from "appwrite";
+import config from "../config/config";
 
 export class Service{
     client = new Client();

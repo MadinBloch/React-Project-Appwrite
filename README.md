@@ -8,3 +8,7 @@ Add the Project of React and Config it
 
 Add Appwrite Database config and Query FileUpload Method in databseconfig
 CRUD of Posts and Listing of Post
+
+# Day 3 
+
+Add New Store and authSlice for Global State Management and Fix the Database Issue  
