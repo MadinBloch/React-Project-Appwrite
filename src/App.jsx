@@ -1,16 +1,40 @@
 
+import { useEffect, useState} from 'react'
+import {useDispatch} from 'react-redux'
 import config from './config/config'
+import authService from './appwrite/auth';
+import {login,logout} from './store/authSlice'
+import  {Header}  from './components/Header/Header';
+import  {Footer } from './components/Footer/Footer';
+import { Outlet } from 'react-router-dom';
 
 function App() {
 
-  // console.log(import.meta.env.VITE_SOME_KEY);
-   
+  const [loading,setLoading] = useState(true);
+  const dispatch = useDispatch(); 
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const userData = await authService.getCurrentUser();
+        dispatch(login(userData));
+      } catch (error) {
+        dispatch(logout());
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
   
-  return (
-    <>
-      <h1> Hello Starting Project </h1>
-    </>
-  )
+  return !loading ? (
+    <div>
+        <Header/>
+          <main>
+              <Outlet/>
+          </main>
+        <Footer/>
+    </div>
+  ) : null;
 }
 
 export default App
